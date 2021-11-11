@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>News Api Fetch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap"
+          rel="stylesheet">
+</head>
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    #news {
+        width: 80%;
+        margin: 20px auto;
+        columns: 3 250px;
+    }
+
+    .card {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .card-img {
+        width: 100%;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .title {
+        font-weight: bolder;
+        color: #0000ff;
+        margin-bottom: 5px;
+    }
+
+    .author {
+        color: #00ff00;
+        margin-bottom: 5px;
+        display: inline-block;
+    }
+
+    .description {
+        color: rgba(0,0,0,.5);
+        margin-bottom: 10px;
+    }
+
+    .url {
+        text-align: right;
+        margin-bottom: 10px;
+    }
+
+    .read-more {
+        border: 1px solid black;
+        display: inline-block;
+        text-decoration: none;
+        border-radius: 20px;
+        padding: 10px 15px;
+        margin-left: auto;
+        transition: 0.5s;
+    }
+
+    .read-more:hover {
+        background-color: #f1f1f1;
+        transform: translateX(-10px) scale(0.9);
+    }
+
+
+</style>
+<body>
+
+<div id="news">
+
+</div>
+
+
+<script src="news-api.js"></script>
+<script>
+    console.log(data);
+    let articles = data.articles;
+    let news = document.getElementById("news");
+
+    articles.map(function (el, index) {
+        news.innerHTML += `
+            <div class="card">
+                <img src="${el.urlToImage}" class="card-img" alt="">
+                <h4 class="title">${el.title}</h4>
+                <small class="author">${el.author}</small>
+                <p class="description">${el.description}</p>
+                <div class="url">
+                    <a href="${el.url}" class="read-more" target="_blank">Read More</a>
+                </div>
+                <hr>
+            </div>
+        `;
+    })
+</script>
+</body>
+</html>
