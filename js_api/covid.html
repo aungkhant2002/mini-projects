@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Covid 19 api</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap"
+          rel="stylesheet">
+</head>
+
+<style>
+
+    * {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    h2 {
+        color: #0000ff;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    th, tr, td {
+        border: 1px solid #0000ff;
+        padding: 10px 15px;
+    }
+
+</style>
+
+<body>
+
+<h2>Global Table</h2>
+<table>
+    <tbody id="tbody">
+
+    </tbody>
+</table>
+
+<h2>Countries Table</h2>
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Country</th>
+        <th>CountryCode</th>
+        <th>NewConfirmed</th>
+        <th>NewDeaths</th>
+        <th>NewRecovered</th>
+        <th>TotalConfirmed</th>
+        <th>TotalDeaths</th>
+        <th>TotalRecovered</th>
+    </tr>
+    </thead>
+    <tbody id="tb">
+
+    </tbody>
+</table>
+
+
+
+<script src="covid.js"></script>
+<script>
+    console.log(data);
+    let global = data.Global;
+    let countries = data.Countries;
+    let tbody = document.getElementById("tbody");
+    let tb = document.getElementById("tb");
+
+    for (x in global) {
+        tbody.innerHTML += `
+            <tr>
+                <td>${x}</td>
+                <td>${global[x]}</td>
+            </tr>
+        `;
+    }
+
+    let i = 1;
+    for (x of countries) {
+        tb.innerHTML += `
+            <tr>
+                <td>${i}</td>
+                <td>${x.Country}</td>
+                <td>${x.CountryCode}</td>
+                <td>${x.NewConfirmed}</td>
+                <td>${x.NewDeaths}</td>
+                <td>${x.NewRecovered}</td>
+                <td>${x.TotalConfirmed}</td>
+                <td>${x.TotalDeaths}</td>
+                <td>${x.TotalRecovered}</td>
+            </tr>
+        `;
+
+        i++;
+    }
+</script>
+
+
+</body>
+</html>
