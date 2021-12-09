@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Modal With Api Fetch</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Button trigger modal -->
+<!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">-->
+<!--    Launch static backdrop modal-->
+<!--</button>-->
+
+<!-- Modal -->
+<div class="modal fade" id="mb" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mb-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="" alt="" class="img-fluid mb-3" id="mb-img">
+                <p class="text-black-50" id="mb-desc"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row" id="output">
+
+    </div>
+</div>
+
+<script src="./js/bootstrap.min.js"></script>
+<script>
+
+    let mb = document.getElementById("mb");
+    let modalBox = new bootstrap.Modal(mb);
+
+    fetch('https://fakestoreapi.com/products')
+        .then(res => res.json())
+        .then(json => {
+
+            let output = document.getElementById('output');
+            json.map(function (item) {
+                output.innerHTML += `
+                <div class="col-12 col-lg-3">
+                    <div class="card mb-3">
+                        <img src="${item.image}" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <p>${item.title}</p>
+                            <small class="text-black-50">${item.category}</small>
+                            <br>
+                            <button class="btn btn-secondary float-end" onclick="showDetail(${item.id})">Detail</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            })
+        });
+
+    function showDetail(id) {
+        fetch('https://fakestoreapi.com/products/'+id)
+            .then(res=>res.json())
+            .then(json=> {
+                document.getElementById('mb-title').innerHTML = json.title;
+                document.getElementById('mb-img').src = json.image;
+                document.getElementById('mb-desc').innerHTML = json.description;
+            });
+        modalBox.show();
+    }
+
+</script>
+</body>
+</html>
