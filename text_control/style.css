@@ -1,0 +1,23 @@
+body {
+    font-family: Montserrat;
+}
+
+.box {
+    margin-top: 100px;
+    text-align: center;
+}
+
+fieldset {
+    display: inline-block;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+input, select {
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+input[type='text'], select {
+    padding: 5px;
+}
